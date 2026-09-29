@@ -829,3 +829,42 @@
   color: var(--warn);
   font-variant-numeric: tabular-nums;
 }
+
+.select,
+.text-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.teacher-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.teacher-row .text-input {
+  flex: 1 1 120px;
+  width: auto;
+}
+
+.points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.point-warn {
+  color: var(--warn);
+  font-weight: 600;
+}
+
+.summary-box {
+  border: 2px solid var(--neutral);
+  border-radius: 8px;
+  padding: 8px;
+}
