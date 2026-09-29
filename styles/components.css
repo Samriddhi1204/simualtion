@@ -773,3 +773,59 @@
 .panel {
   overflow-x: auto;
 }
+
+.number-input {
+  width: 80px;
+  padding: 4px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.inline {
+  grid-template-columns: auto auto 1fr;
+  margin: 8px 0;
+}
+
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 6px;
+}
+
+.seat-wrap {
+  display: grid;
+  gap: 2px;
+}
+
+.seat {
+  display: grid;
+  gap: 0;
+  min-height: 56px;
+  padding: 4px 6px;
+  border: 2px solid var(--fixed);
+  border-radius: 8px;
+  background: var(--fixed-bg);
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.seat-empty {
+  border-style: dashed;
+  border-color: var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: default;
+  place-items: center;
+}
+
+.seat-over {
+  border-color: var(--problem);
+  background: var(--problem-bg);
+}
+
+.seat-timer {
+  color: var(--warn);
+  font-variant-numeric: tabular-nums;
+}
