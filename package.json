@@ -1,0 +1,9 @@
+{
+  "name": "homework-platform-simulator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive simulator of homework platform problems and their fixes",
+  "scripts": {
+    "test": "node --test test/"
+  }
+}
