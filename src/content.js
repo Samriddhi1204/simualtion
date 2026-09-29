@@ -385,5 +385,16 @@
     return number(value) + (teen ? "th" : suffixes[value % 10] || "th");
   }
 
-  return { assumptions, overview, demos, captions, order: ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] };
+  const navLabels = {
+    overview: "Overview",
+    q1: "Q1 Server load",
+    q2: "Q2 Stuck reports",
+    q3: "Q3 Swapped homework",
+    q4: "Q4 Live help seats",
+    q5: "Q5 No verification",
+    q6: "Q6 Leaderboard",
+    q7: "Q7 Other problems"
+  };
+
+  return { assumptions, overview, demos, captions, navLabels, order: ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] };
 });

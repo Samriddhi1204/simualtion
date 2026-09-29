@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homework Platform: Problems and Fixes Simulator</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <script defer src="src/sim/prng.js"></script>
+  <script defer src="src/sim/clock.js"></script>
+  <script defer src="src/sim/q1-load.js"></script>
+  <script defer src="src/sim/q2-pipeline.js"></script>
+  <script defer src="src/sim/q3-swap.js"></script>
+  <script defer src="src/sim/q4-seats.js"></script>
+  <script defer src="src/sim/q5-verify.js"></script>
+  <script defer src="src/sim/q6-leaderboard.js"></script>
+  <script defer src="src/sim/q7-other.js"></script>
+  <script defer src="src/content.js"></script>
+  <script defer src="src/ui/layout.js"></script>
+  <script defer src="src/ui/toggle.js"></script>
+  <script defer src="src/ui/logpanel.js"></script>
+  <script defer src="src/ui/q1.js"></script>
+  <script defer src="src/ui/q2.js"></script>
+  <script defer src="src/ui/q3.js"></script>
+  <script defer src="src/ui/q4.js"></script>
+  <script defer src="src/ui/q5.js"></script>
+  <script defer src="src/ui/q6.js"></script>
+  <script defer src="src/ui/q7.js"></script>
+  <script defer src="src/ui/tour.js"></script>
+  <script defer src="src/ui/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the open demo</a>
+  <header class="site-header">
+    <div>
+      <h1>Homework Platform: Problems and Fixes Simulator</h1>
+      <p>Cause each system problem yourself, watch it break, then switch the fix on and watch it work.</p>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="btn btn-primary" id="tour-start">Start guided tour</button>
+      <button type="button" class="btn" id="reset-all">Reset all</button>
+    </div>
+  </header>
+  <details class="assumptions" open>
+    <summary>Assumptions</summary>
+    <ul id="assumption-list"></ul>
+  </details>
+  <div class="clock-bar" id="clock-bar" role="group" aria-label="Simulated clock"></div>
+  <div class="app-grid">
+    <nav class="sidebar" id="sidebar" aria-label="Demos"></nav>
+    <main class="main" id="main" tabindex="-1"></main>
+    <aside class="log-panel" id="log-panel" aria-label="Live log panel"></aside>
+  </div>
+  <div id="tour-root"></div>
+</body>
+</html>

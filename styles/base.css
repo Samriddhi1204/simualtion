@@ -1,0 +1,128 @@
+:root {
+  --bg: #f4f6fa;
+  --surface: #ffffff;
+  --surface-2: #eceff5;
+  --text: #18202f;
+  --muted: #4f5b70;
+  --border: #c5ccd9;
+  --problem: #b42318;
+  --problem-bg: #fdebe9;
+  --fixed: #1a7f37;
+  --fixed-bg: #e3f6e9;
+  --warn: #8a5300;
+  --warn-bg: #fff2d1;
+  --neutral: #1d55c4;
+  --neutral-bg: #e5edfc;
+  --focus: #6b21ff;
+  --radius: 10px;
+  --gap: 16px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e131c;
+    --surface: #171f2e;
+    --surface-2: #202a3c;
+    --text: #e8edf6;
+    --muted: #a6b1c5;
+    --border: #35425c;
+    --problem: #ff9088;
+    --problem-bg: #47211e;
+    --fixed: #66d686;
+    --fixed-bg: #163a24;
+    --warn: #f3b846;
+    --warn-bg: #40300d;
+    --neutral: #8fb6ff;
+    --neutral-bg: #1c2f57;
+    --focus: #b99cff;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.25;
+  margin: 0 0 8px;
+}
+
+h1 {
+  font-size: 1.35rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+h3 {
+  font-size: 1rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+p {
+  margin: 0 0 8px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  background: var(--surface);
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 8px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
