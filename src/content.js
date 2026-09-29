@@ -374,7 +374,8 @@
         return info.allowed ? "Homework of " + info.requestedId + " opened." : "Access denied: the role check stopped it.";
       },
       overload(info) {
-        return info.grader ? info.grader + " marked the next submission." : "Nobody is grading because the teacher is absent.";
+        if (info.grader) return info.grader + " marked the next submission.";
+        return info.stopped ? "Nobody is grading because the teacher is absent." : "Press Next submission to grade.";
       }
     }
   };
