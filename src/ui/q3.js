@@ -4,7 +4,7 @@
   }
 
   function create(ctx) {
-    const { el, button, demoFrame, logFixChange } = window.UiLayout;
+    const { el, fill, button, demoFrame, logFixChange } = window.UiLayout;
     const model = window.SimQ3;
     const content = ctx.content.demos.q3;
     const colors = Object.fromEntries(model.STUDENTS.map((student) => [student.name, student.color]));
@@ -133,9 +133,9 @@
 
     function render() {
       tabs.forEach((tab) => tab.setAttribute("aria-pressed", String(tab.dataset.key === scenario)));
-      students.replaceChildren(...model.STUDENTS.map(studentCard));
+      fill(students, ...model.STUDENTS.map(studentCard));
       if (!result) {
-        details.replaceChildren(el("p", { class: "muted", text: "The storage folder, database table and what the teacher sees appear here." }));
+        fill(details, el("p", { class: "muted", text: "The storage folder, database table and what the teacher sees appear here." }));
         frame.setCaption(ctx.content.captions.q3.idle);
         return;
       }
@@ -151,7 +151,7 @@
       );
       panels.push(panel("Steps", listOf(result.steps.map((step) => el("span", { text: step })))));
       panels.push(teacherPanel(result.teacher));
-      details.replaceChildren(...panels);
+      fill(details, ...panels);
       frame.setCaption(ctx.content.captions.q3[scenario]({ fixed: result.teacher.every((row) => row.correct) }));
     }
 

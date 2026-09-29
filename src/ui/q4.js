@@ -2,7 +2,7 @@
   const VISITOR = { id: "visitor", name: "Visitor", marks: [50, 50, 50] };
 
   function create(ctx) {
-    const { el, button, badge, demoFrame, logFixChange } = window.UiLayout;
+    const { el, fill, button, badge, demoFrame, logFixChange } = window.UiLayout;
     const model = window.SimQ4;
     const content = ctx.content.demos.q4;
     let state = model.createSession(4);
@@ -148,7 +148,7 @@
       const filled = state.seats.map(seatNode);
       const empties = Array.from({ length: Math.max(0, state.capacity - state.seats.length) }, emptySeat);
       const over = model.overCapacity(state);
-      seatsNode.replaceChildren(
+      fill(seatsNode, 
         el("p", null, over > 0 ? badge("problem", state.seats.length + " of " + state.capacity + " seats: over capacity") : badge("neutral", state.seats.length + " of " + state.capacity + " seats")),
         el("div", { class: "seat-grid" }, filled, empties)
       );
@@ -156,7 +156,7 @@
 
     function renderWaiting() {
       if (!state.fixes.waitingList) {
-        waitingNode.replaceChildren(el("p", { class: "muted", text: "No waiting list: extra students are simply turned away (" + state.turnedAway.length + " so far)." }));
+        fill(waitingNode, el("p", { class: "muted", text: "No waiting list: extra students are simply turned away (" + state.turnedAway.length + " so far)." }));
         return;
       }
       const rows = state.waiting.map((entry, index) => {
@@ -170,7 +170,7 @@
         }, { class: "btn-small" })) : null;
         return el("tr", null, el("td", { text: String(index + 1) }), el("td", { text: student.name + " (" + student.id + ")" }), el("td", { text: marks }), el("td", { text: String(Math.round(model.averageMarks(student))) }), el("td", { text: rotated }), el("td", null, listen));
       });
-      waitingNode.replaceChildren(
+      fill(waitingNode, 
         el("h4", { text: "Waiting list and recent test marks" }),
         rows.length
           ? el("table", { class: "mini-table" }, el("tr", null, ["Position", "Student", "Last 3 marks", "Average", "Rotation", ""].map((head) => el("th", { text: head }))), rows)
@@ -205,7 +205,7 @@
       capacityInput.value = String(state.capacity);
       capacityInput.disabled = !state.fixes.capacity;
       capacityNote.textContent = state.fixes.capacity ? "a setting" : "hard-coded at 20";
-      loginNode.replaceChildren("Login state: ", badge(loginText.startsWith("Not") ? "problem" : "neutral", state.fixes.authenticate ? loginText + " (login required)" : loginText));
+      fill(loginNode, "Login state: ", badge(loginText.startsWith("Not") ? "problem" : "neutral", state.fixes.authenticate ? loginText + " (login required)" : loginText));
       renderServers();
       frame.setCaption(ctx.content.captions.q4({ overCapacity: model.overCapacity(state), seats: state.seats.length, capacity: state.capacity, waiting: state.waiting.length, lastLine }));
     }

@@ -1,6 +1,6 @@
 (function () {
   function create(ctx) {
-    const { el, button, badge, demoFrame, logFixChange } = window.UiLayout;
+    const { el, fill, button, badge, demoFrame, logFixChange } = window.UiLayout;
     const model = window.SimQ5;
     const content = ctx.content.demos.q5;
     const captions = ctx.content.captions.q5;
@@ -108,7 +108,7 @@
     }
 
     function renderStudent() {
-      studentOutput.replaceChildren(
+      fill(studentOutput, 
         pending ? summaryNode() : el("p", null, studentMessage),
         receipt ? el("p", null, badge("fixed", "Receipt " + receipt.id + " at " + window.SimClock.formatClockTime(receipt.time))) : null,
         el("p", { class: "muted", text: "Submissions saved: " + side.submissions.length })
@@ -133,7 +133,7 @@
         return;
       }
       const summary = model.teacherSummary(book, item.id, score, comments);
-      dialog.replaceChildren(
+      fill(dialog, 
         el("h3", { text: "Are you sure?" }),
         el("dl", { class: "stats" }, ...[["Student", summary.student], ["Assignment", summary.assignment], ["Score", String(summary.score)], ["Comments", summary.comments]].flatMap(([label, value]) => [el("dt", { text: label }), el("dd", { text: value })])),
         el("div", { class: "button-row" }, button("Yes, save", () => {
@@ -152,12 +152,12 @@
     }
 
     function renderTeacher() {
-      teacherRows.replaceChildren(...book.submissions.map(teacherRow));
+      fill(teacherRows, ...book.submissions.map(teacherRow));
       if (!fixes.history) {
-        historyNode.replaceChildren(el("h4", { text: "History" }), el("p", { class: "seen-bad", text: "No record of who changed this" }));
+        fill(historyNode, el("h4", { text: "History" }), el("p", { class: "seen-bad", text: "No record of who changed this" }));
         return;
       }
-      historyNode.replaceChildren(
+      fill(historyNode, 
         el("h4", { text: "History of changes" }),
         book.history.length
           ? el("table", { class: "mini-table" }, el("tr", null, ["Submission", "Who", "When", "Old", "New"].map((head) => el("th", { text: head }))), book.history.map((row) => el("tr", null, [row.id, row.who, window.SimClock.formatClockTime(row.when), row.oldValue === null ? "none" : row.oldValue, row.newValue].map((cell) => el("td", { text: String(cell) })))))
@@ -166,7 +166,7 @@
     }
 
     function renderPoints() {
-      pointsNode.replaceChildren(
+      fill(pointsNode, 
         ...model.inputPoints(fixes).map((point) => el("li", { class: point.checked ? "seen-ok" : "point-warn" }, el("span", { "aria-hidden": "true", text: point.checked ? "✔ " : "⚠ " }), point.label + (point.checked ? " - checked" : " - unchecked")))
       );
     }

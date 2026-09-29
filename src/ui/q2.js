@@ -8,7 +8,7 @@
   const SCORE_TYPES = { info: "info", ok: "ok", warn: "warn", error: "error" };
 
   function create(ctx) {
-    const { el, button, badge, demoFrame, logFixChange } = window.UiLayout;
+    const { el, fill, button, badge, demoFrame, logFixChange } = window.UiLayout;
     const model = window.SimQ2;
     const content = ctx.content.demos.q2;
     let state = model.createPipeline(11);
@@ -101,7 +101,7 @@
         return;
       }
       pendingMark = proposal;
-      dialog.replaceChildren(
+      fill(dialog, 
         el("h3", { text: "Are you sure?" }),
         el("p", { text: "Save score " + proposal.score + " for " + proposal.id + "?" }),
         el("p", { class: "muted", text: "This prevents accidents but does not fix stuck reports." }),
@@ -158,7 +158,7 @@
     }
 
     function renderBoard() {
-      board.replaceChildren(
+      fill(board, 
         ...COLUMNS.map((column) => {
           const cards = state.cards.filter((card) => card.column === column.key);
           return el("section", { class: "column", "aria-label": column.title }, el("h4", { text: column.title + " (" + cards.length + ")" }), cards.map(cardNode));
@@ -166,7 +166,7 @@
       );
       const rejected = state.cards.filter((card) => card.column === "rejected");
       const pending = model.pendingTooLong(state);
-      lanes.replaceChildren(
+      fill(lanes, 
         el("section", { class: "column lane-rejected" }, el("h4", { text: "Rejected lane (" + rejected.length + ")" }), rejected.map(cardNode)),
         el(
           "section",
@@ -186,18 +186,18 @@
           el("span", { class: "gauge-item", text: "Processors: " + stats.processors })
         );
       }
-      gauge.replaceChildren(...parts);
+      fill(gauge, ...parts);
       processorButton.hidden = !state.fixes.queueSize;
       if (state.fixes.queueSize) gauge.append(processorButton);
     }
 
     function renderTrail() {
       if (!selectedId) {
-        trail.replaceChildren(el("p", { class: "muted", text: "Find the cause: click any card to open its log trail." }));
+        fill(trail, el("p", { class: "muted", text: "Find the cause: click any card to open its log trail." }));
         return;
       }
       const lines = model.cardTrail(state, selectedId);
-      trail.replaceChildren(
+      fill(trail, 
         el("h4", { text: "Log trail of " + selectedId }),
         lines.length
           ? el("ol", { class: "trail-list" }, lines.map((entry, index) => el("li", { class: index === lines.length - 1 ? "trail-last" : "" }, "[" + window.SimClock.formatClockTime(entry.time) + "] " + entry.step + (index === lines.length - 1 ? "  ← last step reached" : ""))))

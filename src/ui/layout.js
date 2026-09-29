@@ -26,6 +26,12 @@
     return node;
   }
 
+  function fill(node, ...children) {
+    node.replaceChildren();
+    append(node, children);
+    return node;
+  }
+
   function button(label, onClick, options) {
     const settings = options || {};
     return el("button", { type: "button", class: "btn " + (settings.class || ""), onClick, disabled: settings.disabled, title: settings.title }, label);
@@ -150,8 +156,8 @@
     const nodes = [
       { key: "students", label: "Students", x: 30, y: 190, w: 170, h: 70 },
       { key: "site", label: "Homework site", x: 330, y: 180, w: 190, h: 90 },
-      { key: "teacher", label: "Teacher who grades", x: 620, y: 50, w: 170, h: 70 },
-      { key: "helper", label: "Live-help teacher", x: 620, y: 310, w: 170, h: 70 },
+      { key: "teacher", label: "Teacher who grades", x: 630, y: 50, w: 190, h: 70 },
+      { key: "helper", label: "Live-help teacher", x: 630, y: 310, w: 190, h: 70 },
       { key: "classes", label: "Live classes", x: 330, y: 20, w: 190, h: 60 },
       { key: "chat", label: "Group chat per group", x: 30, y: 360, w: 170, h: 60 },
       { key: "board", label: "Point board", x: 330, y: 360, w: 190, h: 60 }
@@ -160,10 +166,10 @@
     const pins = [
       { id: "q1", x: 340, y: 178, hint: "Many students hit the server" },
       { id: "q2", x: 570, y: 150, hint: "Reports get stuck" },
-      { id: "q3", x: 510, y: 232, hint: "Homework gets swapped" },
-      { id: "q4", x: 610, y: 340, hint: "Live help session overfills" },
+      { id: "q3", x: 500, y: 290, hint: "Homework gets swapped" },
+      { id: "q4", x: 625, y: 300, hint: "Live help session overfills" },
       { id: "q5", x: 265, y: 215, hint: "No cross-verification" },
-      { id: "q6", x: 510, y: 372, hint: "Leaderboard rank" }
+      { id: "q6", x: 500, y: 372, hint: "Leaderboard rank" }
     ];
 
     function nodeOf(key) {
@@ -218,5 +224,5 @@
     );
   }
 
-  window.UiLayout = { el, clear, button, badge, slider, number, speedControl, demoFrame, buildOverview, logFixChange, ICONS };
+  window.UiLayout = { el, clear, fill, button, badge, slider, number, speedControl, demoFrame, buildOverview, logFixChange, ICONS };
 })();

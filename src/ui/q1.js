@@ -11,7 +11,7 @@
   }
 
   function create(ctx) {
-    const { el, button, badge, slider, number, demoFrame, logFixChange } = window.UiLayout;
+    const { el, fill, button, badge, slider, number, demoFrame, logFixChange } = window.UiLayout;
     const model = window.SimQ1;
     const content = ctx.content.demos.q1;
     let config = model.defaultConfig();
@@ -145,7 +145,7 @@
         return el("div", { class: "server " + (alive ? "server-up" : "server-dead") }, el("span", { "aria-hidden": "true", text: alive ? "✔" : "✖" }), " Server " + (index + 1) + (alive ? " running" : " killed"));
       });
       const balancer = config.fixes.loadBalancer ? el("div", { class: "server balancer" }, el("span", { "aria-hidden": "true", text: "⚖" }), " Load balancer") : null;
-      serversNode.replaceChildren(...[balancer, ...tiles].filter(Boolean));
+      fill(serversNode, ...[balancer, ...tiles].filter(Boolean));
     }
 
     function renderBands() {
@@ -154,7 +154,7 @@
       slotsSlider.input.disabled = !active;
       if (!active) return;
       const bands = model.slotBands(config);
-      bandsNode.replaceChildren(
+      fill(bandsNode, 
         ...bands.map((band, index) =>
           el("div", { class: "band band-" + (index % 5), style: "flex:1 1 0" }, "Slot " + band.slot + " · Group " + groupOrder[index], el("small", { text: number(band.students) + " students, " + (band.end - band.start) + " min" }))
         )
@@ -178,7 +178,7 @@
       loadBar.setAttribute("aria-valuenow", String(Math.round(width)));
       loadLabel.textContent = playhead === null ? "Peak load " : "Load now ";
       loadText.textContent = number(info.loadPercent) + " percent" + (info.loadPercent > MAX_LOAD_SHOWN ? " (bar stops at 150)" : "");
-      statusNode.replaceChildren(badge(STATUS_KIND[info.status], "Status: " + STATUS_TEXT[info.status]));
+      fill(statusNode, badge(STATUS_KIND[info.status], "Status: " + STATUS_TEXT[info.status]));
       averageNode.textContent = info.averageMs === null ? "Requests time out" : number(info.averageMs) + " ms";
       tryAgainNode.textContent = number(summary.tryAgainCount);
       backlogNode.textContent = config.fixes.queue ? number(info.backlog) + " units (drains later)" : "Not used";

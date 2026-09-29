@@ -916,3 +916,30 @@
 [hidden] {
   display: none !important;
 }
+
+.q7-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.q7-title {
+  color: var(--text);
+  text-transform: none;
+  font-size: 1.05rem;
+}
+
+.card-body {
+  margin: 8px 0;
+}
+
+.is-disabled {
+  opacity: 0.55;
+}
+
+.address {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-2);
+}

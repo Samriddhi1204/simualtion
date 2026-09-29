@@ -6,7 +6,7 @@
   const STATUS_KIND = { submitted: "neutral", "under review": "warn", evaluated: "fixed" };
 
   function create(ctx) {
-    const { el, button, badge, number, demoFrame, logFixChange, speedControl } = window.UiLayout;
+    const { el, fill, button, badge, number, demoFrame, logFixChange, speedControl } = window.UiLayout;
     const model = window.SimQ6;
     const content = ctx.content.demos.q6;
     const board = model.createBoard(6);
@@ -195,29 +195,29 @@
       tableDirty = false;
       const showBoard = fixes.showAll || evaluated >= board.students.length;
       if (!showBoard) {
-        tableHost.replaceChildren(el("div", { class: "pending-box" }, badge("warn", "Results pending"), el("p", { text: "The board stays empty until every submission is graded. Your own row shows nothing." })));
+        fill(tableHost, el("div", { class: "pending-box" }, badge("warn", "Results pending"), el("p", { text: "The board stays empty until every submission is graded. Your own row shows nothing." })));
         return;
       }
       const rows = buildRows();
       if (loading && now - loading.start < loading.delay) {
         const percent = Math.round(((now - loading.start) / loading.delay) * 100);
-        tableHost.replaceChildren(el("div", { class: "pending-box" }, el("p", { text: "Loading " + number(rows.length) + " rows (illustrative delay)... " + percent + " percent" }), el("progress", { max: "100", value: String(percent), "aria-label": "Loading the board" })));
+        fill(tableHost, el("div", { class: "pending-box" }, el("p", { text: "Loading " + number(rows.length) + " rows (illustrative delay)... " + percent + " percent" }), el("progress", { max: "100", value: String(percent), "aria-label": "Loading the board" })));
         tableDirty = true;
         return;
       }
       loading = null;
       if (fixes.paging) page = Math.min(page, model.pageCount(rows.length) - 1);
-      tableHost.replaceChildren(tableFor(rows));
+      fill(tableHost, tableFor(rows));
       renderPager(rows.length);
     }
 
     function renderPager(rowCount) {
       if (!fixes.paging) {
-        pagerNode.replaceChildren();
+        fill(pagerNode, );
         return;
       }
       const pages = model.pageCount(rowCount);
-      pagerNode.replaceChildren(
+      fill(pagerNode, 
         button("Previous page", () => changePage(-1), { disabled: page === 0 }),
         el("span", { text: "Page " + (page + 1) + " of " + pages }),
         button("Next page", () => changePage(1), { disabled: page >= pages - 1 })
@@ -242,16 +242,16 @@
         if (lastRank !== null && rank.rank !== lastRank) change = { ...model.rankChange(lastRank, rank.rank), until: performance.now() + CHANGE_SHOW_MS };
         lastRank = rank.rank;
         const shown = change && performance.now() < change.until ? change : null;
-        rankNode.replaceChildren(model.rankLine(rank) + " ", badge("warn", "Provisional"), shown && shown.direction !== "same" ? el("span", { class: "rank-change change-" + shown.direction }, shown.direction === "up" ? " ▲ up " : " ▼ down ", shown.amount) : null);
+        fill(rankNode, model.rankLine(rank) + " ", badge("warn", "Provisional"), shown && shown.direction !== "same" ? el("span", { class: "rank-change change-" + shown.direction }, shown.direction === "up" ? " ▲ up " : " ▼ down ", shown.amount) : null);
       } else if (!rank) {
         lastRank = null;
       }
       statusNode.hidden = !fixes.statusPill;
-      statusNode.replaceChildren("Your submission status: ", badge(STATUS_KIND[status], status));
+      fill(statusNode, "Your submission status: ", badge(STATUS_KIND[status], status));
       tieNode.hidden = !fixes.twoBoards;
       const tie = fixes.twoBoards ? model.tieExample(board, count) : null;
       tieNode.textContent = tie ? "Tie example: " + model.displayName(tie.first.student, nicknames) + " and " + model.displayName(tie.second.student, nicknames) + " both have " + tie.first.student.marks + " marks, so the earlier finish ranks higher (" + tie.first.rank + " then " + tie.second.rank + ")." : "";
-      liveNode.replaceChildren(fixes.realtime ? badge("fixed", "● live") : null);
+      fill(liveNode, fixes.realtime ? badge("fixed", "● live") : null);
       refreshButton.hidden = !(fixes.showAll && !fixes.realtime);
       jumpButton.hidden = !fixes.paging;
       nicknameLabel.hidden = !fixes.nicknames;
