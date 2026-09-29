@@ -868,3 +868,51 @@
   border-radius: 8px;
   padding: 8px;
 }
+
+.table-host {
+  max-height: 420px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  margin-top: 8px;
+}
+
+.board-table {
+  width: 100%;
+}
+
+.row-you {
+  background: var(--neutral-bg);
+  font-weight: 700;
+  outline: 2px solid var(--neutral);
+}
+
+.pending-box {
+  padding: 16px;
+}
+
+.rank-line,
+.status-line,
+.progress-line {
+  margin: 6px 0;
+  font-weight: 600;
+}
+
+.change-up {
+  color: var(--fixed);
+}
+
+.change-down {
+  color: var(--problem);
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+[hidden] {
+  display: none !important;
+}
