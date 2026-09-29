@@ -4,6 +4,6 @@
   "private": true,
   "description": "Interactive simulator of homework platform problems and their fixes",
   "scripts": {
-    "test": "node --test test/"
+    "test": "node --test \"test/*.test.js\""
   }
 }
